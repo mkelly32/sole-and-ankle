@@ -5,17 +5,6 @@ import { COLORS, WEIGHTS } from '../../constants';
 import { formatPrice, pluralize, isNewShoe } from '../../utils';
 import Spacer from '../Spacer';
 
-//const Flag = ({variant}) => {
-//    switch (variant) {
-//        case 'on-sale':
-//            return null;
-//        case 'new-releaes':
-//            return null;
-//        default:
-//            return null;
-//    }
-//};
-
 const ShoeCard = ({
   slug,
   name,
@@ -44,7 +33,8 @@ const ShoeCard = ({
 
   return (
     <Link href={`/shoe/${slug}`}>
-      {variant === 'default' ? null : <Flag variant={variant}>{variant === 'on-sale' ? 'Sale' : 'Just Released!'}</Flag>}
+      {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
+      {variant === 'new-release' && <NewReleaseFlag>Just Released!</NewReleaseFlag>}
       <Wrapper>
         <ImageWrapper>
           <Image alt="" src={imageSrc} />
@@ -68,10 +58,11 @@ const Link = styled.a`
   color: inherit;
   position: relative;
   isolation: isolate;
+  flex: 1;
+  min-width: 277px;
 `;
 
 const Wrapper = styled.article`
-    flex: 1 1 344px;
 `;
 
 const ImageWrapper = styled.div`
@@ -79,7 +70,7 @@ const ImageWrapper = styled.div`
 `;
 
 const Image = styled.img`
-    width: 344px;
+    width: 100%;
     border-radius: 16px 16px 4px 4px;
 `;
 
@@ -109,7 +100,6 @@ const SalePrice = styled.span`
 `;
 
 const Flag = styled.div`
-    background-color: ${p => p.variant === 'on-sale' ? COLORS.primary : COLORS.secondary};
     position: absolute;
     top: 12px;
     right: -4px;
@@ -117,6 +107,16 @@ const Flag = styled.div`
     padding: 10px 7px 10px 9px;
     color: ${COLORS.white};
     border-radius: 4px;
+    font-weight: bold;
+    font-size: ${14 / 16}rem;
+`;
+
+const SaleFlag = styled(Flag)`
+    background-color: ${COLORS.primary};
+`;
+
+const NewReleaseFlag = styled(Flag)`
+    background-color: ${COLORS.secondary};
 `;
 
 export default ShoeCard;

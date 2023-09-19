@@ -29,6 +29,7 @@ const Wrapper = styled.div`
   display: flex;
   padding: 12px 32px;
   justify-content: flex-end;
+  align-items: center;
 `;
 
 const MarketingMessage = styled.span`
